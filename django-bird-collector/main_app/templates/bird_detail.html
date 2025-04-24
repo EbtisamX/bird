@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Single Bird Page</h1>
+
+<h1>{{ bird.name }} is a {{ bird.species }}</h1>
+
+<a href="{% url 'bird_update' bird.pk %}">Edit</a>
+<a href="{% url 'bird_delete' bird.pk %}">Delete</a>
+
+<form action="{% url 'add_appointment' bird.id %}" method="post">
+  {% csrf_token %}
+  {{ appointment_form.as_p }}
+  <input type="submit" value="Add Appointment">
+</form>
+
+<div class="col s6">
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Clinic</th>
+        <th>Appointment</th>
+        <th>Nurse</th>
+      </tr>
+      {% for vet in bird.vet_set.all %}
+      <tr>
+        <td>{{ vet.clinic }}</td>
+        <td>{{ vet.appointment }}</td>
+        <td>{{ vet.nurse_name }}</td>
+      </tr>
+      {% endfor %}
+    </thead>
+  </table>
+</div>
+
+{% if bird.accessories.count %}
+  <h4>Accessories:</h4>
+  {% for accessory in bird.accessories.all %}
+    <p>
+      {{ bird.name }} has a {{ accessory.type }}: {{ accessory.name }}
+      <form method="post" action="{% url 'dessoc_accessory' bird.id accessory.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Remove</button>
+      </form>
+    </p>
+  {% endfor %}
+{% else %}
+  <h4>No Accessories!</h4>
+{% endif %}
+
+{% if accessories_bird_does_not_have.count %}
+  <h4>Available Accessories:</h4>
+  <a href="{% url 'accessory_create' %}">
+    <button>Add New Accessory</button>
+  </a>
+  {% for accessory in accessories_bird_does_not_have %}
+    <p>{{ accessory.name }}</p>
+    <form method="post" action="{% url 'assoc_accessory' bird.id accessory.id %}">
+      {% csrf_token %}
+      <button type="submit">Add Accessory</button>
+    </form>
+  {% endfor %}
+{% else %}
+  <h4>No available accessories!</h4>
+{% endif %}
+
+<script>
+  const dateElement = document.querySelector('#id_appointment');
+  M.Datepicker.init(dateElement, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  const selects = document.querySelectorAll('select');
+  M.FormSelect.init(selects);
+</script>
+
+{% endblock %}

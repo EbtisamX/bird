@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All Birds</h1>
+<ul>
+  {% for bird in birds %}
+    <li>
+      <a href="{% url 'bird_detail' bird.pk %}"><h2>{{ bird.name }}</h2></a>
+      <p>Species: {{ bird.species }}</p>
+      <p>Color: {{ bird.color }}</p>
+    </li>
+  {% empty %}
+    <h2>There are no birds</h2>
+  {% endfor %}
+</ul>
+{% endblock %}

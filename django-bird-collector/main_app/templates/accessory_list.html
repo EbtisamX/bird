@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All Accessories</h1>
+<ul>
+    {% for accessory in accessories %}
+    <li>
+        <!-- Edit and delete buttons for the accessory -->
+        {{ accessory.name }} ({{ accessory.type }})
+        <a href="{% url 'accessory_update' accessory.id %}">Edit</a>
+        |
+        <a href="{% url 'accessory_delete' accessory.id %}">Delete</a>
+      </li>
+    {% endfor %}
+</ul>
+{% endblock %}

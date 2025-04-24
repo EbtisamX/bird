@@ -1,0 +1,37 @@
+
+nav {
+    background-color: rgba(236, 229, 229, 0.505); 
+    backdrop-filter: blur(20px); 
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  
+  nav a {
+    color: white;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  nav form {
+    display: inline;
+  }
+
+  nav button {
+    background-color: #f2f8f7b5;
+    color: rgb(11, 11, 11);
+    border-radius: 11px; 
+  }
+  
+  nav button:hover {
+    background-color: #dbe0e018;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: radial-gradient(circle, rgba(255, 148, 193, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  }
+  a {
+    color: black;
+  }
