@@ -1,6 +1,6 @@
-# Brid Project
+# Bird Project
 
-Brid is a dynamic web application built with Django.  
+Bird is a dynamic web application built with Django.  
 It provides users with an interactive and organized experience, supporting data management, user authentication, and clean UI/UX design.
 
 ## Features
